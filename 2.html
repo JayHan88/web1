@@ -3,27 +3,49 @@
 <html>
   <head>
     <title>WEB1 - CSS</title>
-    <meta charset="utf-8">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144736671-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <script type="text/javascript">
+      var Body = {
+        setColor : function(color){
+          document.querySelector('body').style.color = color;
+        },
+        setBackgroundColor : function(color){
+          document.querySelector('body').style.backgroundColor = color;
+        }
+      }
 
-      gtag('config', 'UA-144736671-1');
+      var Links = {
+        setColor : function(color){
+          var alist = document.querySelectorAll('a');
+          var i = 0;
+          while(i < alist.length){
+            alist[i].style.color = color;
+            i=i+1;
+          }
+        }
+      }
+
+      function NightDayHandler(self){
+        var target = document.querySelector('body');
+        if(self.value === 'night'){
+          Body.setBackgroundColor('black');
+          Body.setColor('white');
+          self.value = 'day';
+          Links.setColor('powderblue');
+        }
+        else{
+          Body.setBackgroundColor('white');
+          Body.setColor('black');
+          self.value = 'night';
+          Links.setColor('blue');
+        }
+      }
     </script>
 
   </head>
 
   <body>
     <h1><a href="index.html">WEB</a></h1>
-    <input type="button" value="night" onclick="
-      document.querySelector('body').style.backgroundColor='black';
-      document.querySelector('body').style.color='white';">
-    <input type="button" value="day" onclick="
-      document.querySelector('body').style.backgroundColor='white';
-      document.querySelector('body').style.color='black';">
+    <input id="night_day" type="button" value="night" onclick="NightDayHandler(this)">
     <ol>
       <li><a href="1.html">HTML</a></li>
       <li><a href="2.html">CSS</a></li>
